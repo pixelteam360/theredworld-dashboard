@@ -1,7 +1,9 @@
+import OverView from "@/components/modules/Dashboard/OverView";
+
 const CommonLayoutHomePage = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <OverView />
     </div>
   );
 };

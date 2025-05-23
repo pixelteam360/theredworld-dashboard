@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import logo from "../../assets/iamges/logo.png";
+import logo from "../../assets/images/logo.png";
 import {
   SquareUser,
   UserRoundX,
@@ -70,10 +70,10 @@ const SideBar = () => {
   };
   return (
     <Sidebar>
-      <SidebarContent className="!bg-[#1C1C1C] text-white">
+      <SidebarContent>
         <SidebarGroup />
         <SidebarGroupLabel className="mb-14 mt-8 mx-auto">
-          <Image src={logo} alt="logo" width={190} height={50} />
+          <Image src={logo} alt="logo" width={190} height={50} className="w-24"/>
         </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu className="px-4 space-y-3">
@@ -81,10 +81,10 @@ const SideBar = () => {
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
-                  className={`text-[15px] font-bold px-4 ${
+                  className={`text-base font-bold px-6 py-6 hover:bg-primary hover:text-white ${
                     pathName === `${item.url}`
-                      ? "bg-white text-black rounded-lg"
-                      : "text-white"
+                      ? "bg-primary text-white rounded-lg"
+                      : ""
                   }`}
                 >
                   <a href={item.url}>
@@ -97,16 +97,15 @@ const SideBar = () => {
           </SidebarMenu>
         </SidebarGroupContent>
         <SidebarGroup />
-
       </SidebarContent>
-      <SidebarFooter className="!bg-[#1C1C1C] text-white">
-          <button
-            onClick={handleLolgout}
-            className="py-3 border border-red-400 rounded-lg font-medium text-base"
-          >
-            Log out
-          </button>
-        </SidebarFooter>
+      <SidebarFooter>
+        <button
+          onClick={handleLolgout}
+          className="py-3 border border-red-400 rounded-lg font-medium text-base text-primary"
+        >
+          Log out
+        </button>
+      </SidebarFooter>
     </Sidebar>
   );
 };
