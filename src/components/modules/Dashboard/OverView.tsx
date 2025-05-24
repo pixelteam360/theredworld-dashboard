@@ -17,7 +17,7 @@ const OverView = () => {
     <div className="bg-white rounded-2xl p-7 space-y-6">
       <p className="text-xl text-center">Summery</p>
       <div className="grid md:grid-cols-3 grid-cols-2  gap-7 ">
-        <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center justify-between gap-2 border">
+        <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center gap-2 border">
           <h1 className="text-[40px] font-bold">{overView?.totalUser}</h1>
           <div className="flex gap-3 items-center">
             <FaRegPlayCircle className="text-xl" />
@@ -25,7 +25,7 @@ const OverView = () => {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center justify-between gap-2 border">
+        <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center gap-2 border">
           <h1 className="text-[40px] font-bold">{overView?.totalProfile}</h1>
           <div className="flex gap-3 items-center">
             <PiStudentFill className="text-2xl" />
@@ -33,7 +33,7 @@ const OverView = () => {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center justify-between gap-2 border">
+        <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center gap-2 border">
           <h1 className="text-[40px] font-bold">
             {overView?.totalReviewReport}
           </h1>
