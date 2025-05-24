@@ -1,4 +1,5 @@
-import { Crown, SquarePen } from "lucide-react";
+import { Crown } from "lucide-react";
+import AddSubscriptionModal from "./SubscriptiomModal/SubscriptionModal";
 
 const SubscriptionsCard = () => {
   const item = [1, 2, 3, 4, 5, 6];
@@ -11,11 +12,16 @@ const SubscriptionsCard = () => {
         >
           <Crown className="w-16 h-16 text-[#ffb743]" />
 
-          <p><span className="text-primary text-2xl font-semibold">$30 /</span> Monthly</p>
+          <p>
+            <span className="text-primary text-2xl font-semibold">$30 /</span>{" "}
+            Monthly
+          </p>
 
           <p>One month Free access of all lessons</p>
 
-         <div className="absolute top-2 right-2 text-primary"><SquarePen /></div>
+          <div className="absolute top-2 right-2 ">
+            <AddSubscriptionModal type="Edit" />
+          </div>
         </div>
       ))}
     </div>

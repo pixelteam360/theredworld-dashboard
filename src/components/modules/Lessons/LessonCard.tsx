@@ -49,6 +49,7 @@ const LessonCard = () => {
             <DropdownMenuContent>
               <DropdownMenuItem>Free</DropdownMenuItem>
               <DropdownMenuItem>Premium</DropdownMenuItem>
+              <DropdownMenuItem>Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
