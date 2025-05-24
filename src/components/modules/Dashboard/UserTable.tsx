@@ -24,7 +24,7 @@ const UserTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {item.map((item, idx) => (
+          {item?.map((item, idx) => (
             <TableRow key={idx} className="text-base">
               <TableCell className="flex items-center gap-2">
                 <Image

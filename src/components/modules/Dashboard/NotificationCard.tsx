@@ -5,7 +5,7 @@ const NotificationCard = () => {
   const item = [1, 2, 3, 4, 5, 6];
   return (
     <div>
-      {item.map((item, idx) => (
+      {item?.map((item, idx) => (
         <div key={idx} className="flex gap-2 py-5 border-b">
           <Image
             src={userImage}
