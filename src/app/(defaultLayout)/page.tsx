@@ -1,9 +1,29 @@
+
+import NotificationCard from "@/components/modules/Dashboard/NotificationCard";
 import OverView from "@/components/modules/Dashboard/OverView";
+import UserTable from "@/components/modules/Dashboard/UserTable";
 
 const CommonLayoutHomePage = () => {
   return (
     <div>
       <OverView />
+
+      <div className="bg-white rounded-2xl p-6 grid md:grid-cols-5 grid-cols-1 gap-12 mt-10">
+          <div className="col-span-3">
+            {/* <CustomLineChart  /> */}
+          </div>
+          <div className="col-span-2">
+            
+          </div>
+          <div className="col-span-3">
+            <p className="font-medium my-5 text-lg">All Students</p>
+            <UserTable />
+          </div>
+          <div className="col-span-2">
+            <p className="font-medium my-5 text-lg">Notifications</p>
+            <NotificationCard />
+          </div>
+      </div>
     </div>
   );
 };

@@ -41,21 +41,15 @@ const LoginForm = () => {
     }
   };
   return (
-    <MyFormWrapper onSubmit={onSubmit}>
-      <MyFormInput
-        type="email"
-        name="email"
-        placeholder="email"
-      />
+    <div className="w-full">
+      <MyFormWrapper onSubmit={onSubmit}>
+        <MyFormInput type="email" name="email" placeholder="email" />
 
-      <MyFormInput
-        type="password"
-        name="password"
-        placeholder="password"
-      />
+        <MyFormInput type="password" name="password" placeholder="password" />
 
-      <MyBtn name="Login"/>
-    </MyFormWrapper>
+        <MyBtn name="Login" width="w-full" />
+      </MyFormWrapper>
+    </div>
   );
 };
 

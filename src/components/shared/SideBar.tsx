@@ -12,12 +12,10 @@ import {
 } from "@/components/ui/sidebar";
 import logo from "../../assets/images/logo.png";
 import {
-  SquareUser,
-  UserRoundX,
   Settings,
   ClipboardMinus,
   LayoutDashboardIcon,
-  Contact,
+  Crown,
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -32,24 +30,14 @@ const items = [
     icon: LayoutDashboardIcon,
   },
   {
-    title: "Report",
-    url: "/report",
+    title: "Lessons",
+    url: "/lessons",
     icon: ClipboardMinus,
   },
   {
-    title: "Profile",
-    url: "/profile",
-    icon: Contact,
-  },
-  {
-    title: "User",
-    url: "/user",
-    icon: SquareUser,
-  },
-  {
-    title: "Remove",
-    url: "/remove",
-    icon: UserRoundX,
+    title: "Subscriptions",
+    url: "/subscriptions",
+    icon: Crown,
   },
   {
     title: "Setting",
@@ -81,7 +69,7 @@ const SideBar = () => {
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
-                  className={`text-base font-bold px-6 py-6 hover:bg-primary hover:text-white ${
+                  className={`text-base px-6 py-6 hover:bg-primary hover:text-white ${
                     pathName === `${item.url}`
                       ? "bg-primary text-white rounded-lg"
                       : ""
