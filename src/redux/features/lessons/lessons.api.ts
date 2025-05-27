@@ -41,8 +41,16 @@ export const LessonsApi = baseApi.injectEndpoints({
     updateLesson: builder.mutation({
       query: (args) => ({
         url: `/lesson/${args.id}`,
-        method: "POST",
+        method: "PUT",
         body: args.data,
+      }),
+      invalidatesTags: ["Lessons"],
+    }),
+
+    deleteLesson: builder.mutation({
+      query: (id) => ({
+        url: `/lesson/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["Lessons"],
     }),
@@ -62,5 +70,7 @@ export const {
   useLessonsQuery,
   useSingleLessonQuery,
   useCreatelessonMutation,
+  useUpdateLessonMutation,
+  useDeleteLessonMutation,
   useUpdateTranslationMutation,
 } = LessonsApi;

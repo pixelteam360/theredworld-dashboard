@@ -1,4 +1,4 @@
-import AddLessonModal from "@/components/modules/Lessons/AddLessonModal";
+import AddLessonModal from "@/components/modules/Lessons/Modal/AddLessonModal";
 import LessonCard from "@/components/modules/Lessons/LessonCard";
 
 const page = () => {
