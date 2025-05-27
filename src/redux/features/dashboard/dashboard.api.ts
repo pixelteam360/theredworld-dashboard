@@ -1,0 +1,48 @@
+import baseApi from "@/redux/api/baseApi";
+import { TQueryParams } from "@/types/globalType";
+
+export const DashboardApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    summary: builder.query({
+      query: () => ({
+        url: "/dashboard/summary",
+        method: "GET",
+      }),
+    }),
+
+    chart: builder.query({
+      query: () => ({
+        url: "/dashboard/charts",
+        method: "GET",
+      }),
+    }),
+
+    getAllUser: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.array.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return {
+          url: "/users",
+          method: "GET",
+          params: params,
+        };
+      },
+    }),
+
+    purchesSubscription: builder.query({
+      query: () => ({
+        url: "/purchased-subscription",
+        method: "GET",
+      }),
+    }),
+  }),
+});
+
+export const { useSummaryQuery, useChartQuery, useGetAllUserQuery, usePurchesSubscriptionQuery } =
+  DashboardApi;
