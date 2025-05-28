@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import MyBtn from "@/components/common/MyBtn";
 import MyFormInput from "@/components/form/MyFormInput";
@@ -10,9 +11,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  useCreateSubscriptionMutation,
+  useUpdateSubscriptionMutation,
+} from "@/redux/features/subscription/subscription.api";
 import { SquarePen } from "lucide-react";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
 type data = {
   id: string;
@@ -29,20 +35,47 @@ const AddSubscriptionModal = ({
   payload?: data;
 }) => {
   const [open, setOpen] = useState(false);
+  const [create] = useCreateSubscriptionMutation();
+  const [update] = useUpdateSubscriptionMutation();
 
   const handleSubmit = async (data: FieldValues) => {
-    console.log(data);
-    // const toastId = toast.loading("login...");
+    const toastId = toast.loading("Updating...");
 
-    // try {
-    //   const res = await login(data).unwrap();
+    const price = parseFloat(data.price);
+    if (isNaN(price) || price <= 0) {
+      toast.error("Invalid price. Please enter a valid decimal number.", {
+        id: toastId,
+      });
+      return;
+    }
 
-    //   if (res) {
-    //     return toast.error("Unauthorize Access", { id: toastId });
-    //   }
-    // } catch (err: any) {
-    //   toast.error(err.data?.message || "Faild to login", { id: toastId });
-    // }
+    const duration = parseInt(data.duration, 10);
+    if (isNaN(duration) || duration <= 0) {
+      toast.error("Invalid duration. Please enter a valid number of days.", {
+        id: toastId,
+      });
+      return;
+    }
+
+    const formdata = { title: data.title, price, duration };
+
+    try {
+      let res;
+
+      if (type === "Add") {
+        res = await create({ ...data, price, duration }).unwrap();
+      } else if (type === "Edit") {
+        res = await update({ id: payload?.id, data: formdata }).unwrap();
+      }
+
+      if (res) {
+        setOpen(false);
+        return toast.success("Update Successfull", { id: toastId });
+      }
+    } catch (err: any) {
+      setOpen(false);
+      toast.error(err.data?.message || "Faild to Update", { id: toastId });
+    }
   };
 
   return (
@@ -66,19 +99,11 @@ const AddSubscriptionModal = ({
                   {type} Subscription
                 </h2>
                 <MyFormWrapper onSubmit={handleSubmit} defaultValues={payload}>
-                  <MyFormInput name="title" label="Title" />
-                  <MyFormInput name="duration" label="Duration (day)" />
-                  <MyFormInput name="price" label="Price" />
+                  <MyFormInput name="title" label="Title" placeholder="Monthly Plan"/>
+                  <MyFormInput name="duration" label="Duration (day)" placeholder="120" />
+                  <MyFormInput name="price" label="Price" placeholder="49.00"/>
 
-                  <div className="flex justify-between gap-3">
-                    <MyBtn name="Submit" />
-                    <button
-                      type="button"
-                      className="bg-black rounded-2xl py-3 md:px-8 px-5 text-white"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  <MyBtn name="Submit" width="w-full" />
                 </MyFormWrapper>
               </div>
             </DialogTitle>

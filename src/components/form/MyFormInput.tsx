@@ -176,7 +176,7 @@ const MyFormInput = ({
                 rows={rows || 3}
                 disabled={disabled}
                 className={cn(
-                  "w-full px-4 py-3 md:text-[17px] rounded-2xl focus:outline-none focus:ring-2 border !border-primary/40 bg-transparent ",
+                  "w-full font-normal px-4 py-3 md:text-[17px] rounded-2xl focus:outline-none focus:ring-2 border !border-primary/40 bg-transparent ",
                   error ? "border-red-500" : "border-gray-300",
                   inputClassName
                 )}
@@ -228,7 +228,7 @@ const MyFormInput = ({
                     : type
                 }
                 className={cn(
-                  "w-full px-4 py-3 md:text-[17px] rounded-2xl focus:outline-none focus:ring-2 border !border-primary/40 bg-transparent",
+                  "w-full font-normal px-4 py-3 md:text-[17px] rounded-2xl focus:outline-none focus:ring-2 border !border-primary/40 bg-transparent",
                   error ? "border-red-500" : "border-gray-300",
                   inputClassName
                 )}
@@ -251,7 +251,7 @@ const MyFormInput = ({
               </button>
             )}
             {/* Validation Error Message */}
-            <div className="h-4 mb-1">
+            <div className="h-4 mb-2">
               {error && (
                 <small className="text-red-500 text-xs">{error.message}</small>
               )}
