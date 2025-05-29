@@ -41,8 +41,41 @@ export const DashboardApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    privacy: builder.query({
+      query: () => ({
+        url: "/privacy",
+        method: "GET",
+      }),
+      providesTags: ["Privacy"],
+    }),
+
+    createPrivacy: builder.mutation({
+      query: (data) => ({
+        url: `/privacy`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Privacy"],
+    }),
+
+    updatePrivacy: builder.mutation({
+      query: (args) => ({
+        url: `/privacy/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["Privacy"],
+    }),
   }),
 });
 
-export const { useSummaryQuery, useChartQuery, useGetAllUserQuery, usePurchesSubscriptionQuery } =
-  DashboardApi;
+export const {
+  useSummaryQuery,
+  useChartQuery,
+  useGetAllUserQuery,
+  usePurchesSubscriptionQuery,
+  usePrivacyQuery,
+  useCreatePrivacyMutation,
+  useUpdatePrivacyMutation,
+} = DashboardApi;

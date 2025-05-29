@@ -16,6 +16,7 @@ import {
   ClipboardMinus,
   LayoutDashboardIcon,
   Crown,
+  ShieldQuestion,
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -38,6 +39,11 @@ const items = [
     title: "Subscriptions",
     url: "/subscriptions",
     icon: Crown,
+  },
+  {
+    title: "Privacy Policy",
+    url: "/privacy-policy",
+    icon: ShieldQuestion,
   },
   {
     title: "Setting",

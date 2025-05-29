@@ -22,7 +22,6 @@ const AddLessonModal = () => {
 
   const handleSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Uploading...");
-    console.log(data);
 
     const formData = new FormData();
 

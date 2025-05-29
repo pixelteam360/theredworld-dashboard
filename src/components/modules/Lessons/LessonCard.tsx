@@ -10,14 +10,13 @@ import EditLessonModal from "./Modal/EditLessonModal";
 import DeleteModal from "@/components/common/DeleteModal";
 
 const LessonCard = () => {
-  const { data, isFetching } = useLessonsQuery(undefined);
+  const { data, isFetching } = useLessonsQuery([{ name: "limit", value: 50 }]);
 
   if (isFetching) {
     return <Spinner />;
   }
 
   const item = data?.data?.data;
-  console.log(data?.data?.data);
   return (
     <div>
       {item.map((item: any) => (
