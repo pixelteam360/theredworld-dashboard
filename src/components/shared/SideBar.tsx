@@ -31,8 +31,8 @@ const items = [
     icon: LayoutDashboardIcon,
   },
   {
-    title: "Lessons",
-    url: "/lessons",
+    title: "Lesson Folders",
+    url: "/folders",
     icon: ClipboardMinus,
   },
   {

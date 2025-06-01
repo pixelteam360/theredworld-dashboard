@@ -13,6 +13,14 @@ const SubscriptionsCard = () => {
     return <Spinner />;
   }
   const item = data?.data;
+
+  if (item.length < 1) {
+    return (
+      <h2 className="text-xl font-semibold text-primary text-center">
+        No Data Found
+      </h2>
+    );
+  }
   return (
     <div className="grid grid-cols-3 gap-7">
       {item.map((item: any) => (
