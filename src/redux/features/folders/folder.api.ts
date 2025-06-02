@@ -31,6 +31,25 @@ export const FolderApi = baseApi.injectEndpoints({
       invalidatesTags: ["Folder"],
     }),
 
+    folderLessons: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.data.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: `/folder/lessons/${args.id}`,
+          method: "GET",
+          params: params,
+        };
+      },
+
+      providesTags: ["Lessons"],
+    }),
+
     updateFolder: builder.mutation({
       query: (args) => ({
         url: `/folder/${args.id}`,
@@ -54,4 +73,5 @@ export const {
   useGetFoldersQuery,
   useCreateFolderMutation,
   useUpdateFolderMutation,
+  useFolderLessonsQuery
 } = FolderApi;

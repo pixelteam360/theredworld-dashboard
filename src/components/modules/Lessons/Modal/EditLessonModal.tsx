@@ -20,33 +20,50 @@ import { toast } from "sonner";
 const EditLessonModal = ({
   id,
   title,
+  lessonNumber,
   isLocked,
+  audioType,
+  name,
+  btn
 }: {
   id: string;
-  title: string;
-  isLocked: boolean;
+  title?: string;
+  lessonNumber?: string;
+  isLocked?: boolean;
+  audioType?: "miniStory" | "vocabulary";
+  name: string;
+  btn: "text" | "icon"
 }) => {
   const [open, setOpen] = useState(false);
   const [updateLesson] = useUpdateLessonMutation();
-  const [check, setCheck] = useState<boolean>(isLocked);
-
+  const [check, setCheck] = useState<boolean | undefined>(isLocked);
   const handleSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Upating...");
+
+    const lessonNumber = Number(parseFloat(data.lessonNumber));
+
+    if (!lessonNumber) {
+      return toast.error("Invalid Lesson number", { id: toastId });
+    }
 
     const formData = new FormData();
 
     formData.append(
       "data",
-      JSON.stringify({ title: data.title, isLocked: check })
+      JSON.stringify({ title: data.title, isLocked: check, lessonNumber })
     );
     if (data.image) {
       formData.append("image", data.image);
     }
 
+    if (audioType) {
+      formData.append(audioType, data.audio);
+    }
+
     const updatedData = {
       data: formData,
-      id
-    }
+      id,
+    };
 
     try {
       const res = await updateLesson(updatedData).unwrap();
@@ -64,13 +81,19 @@ const EditLessonModal = ({
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>
+        {
+          btn === "icon" ? <DialogTrigger>
           <EllipsisVertical />
         </DialogTrigger>
+        : <DialogTrigger className="bg-primary text-white px-2 py-1 rounded-lg mt-7">
+          {name}
+        </DialogTrigger>
+        }
+        
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="text-center mb-5 text-2xl">
-              Add Lesson
+              {name}
             </DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
@@ -80,27 +103,51 @@ const EditLessonModal = ({
             defaultValues={{
               id,
               title,
+              lessonNumber,
               isLocked,
             }}
           >
-            <MyFormInput name="title" label="Audio Title" placeholder="title" />
-            <MyFormInput
-              type="file"
-              acceptType="image/*"
-              name="image"
-              label="Audio Image (potional)"
-              filePlaceholder="Upload image"
-              required={false}
-            />
+            {!audioType && (
+              <div>
+                <MyFormInput
+                  name="title"
+                  label="Audio Title"
+                  placeholder="title"
+                />
+                <MyFormInput
+                  name="lessonNumber"
+                  label="Lesson Number"
+                  placeholder="number"
+                />
+                <MyFormInput
+                  type="file"
+                  acceptType="image/*"
+                  name="image"
+                  label="Audio Image (potional)"
+                  filePlaceholder="Upload image"
+                  required={false}
+                />
 
-            <label className="flex items-center gap-2 mb-3">
-              <input
-                type="checkbox"
-                checked={!check}
-                onChange={() => setCheck(!check)}
+                <label className="flex items-center gap-2 mb-3">
+                  <input
+                    type="checkbox"
+                    checked={!check}
+                    onChange={() => setCheck(!check)}
+                  />
+                  Make it free
+                </label>
+              </div>
+            )}
+
+            {audioType && (
+              <MyFormInput
+                type="file"
+                name="audio"
+                label="Audio File"
+                filePlaceholder="Upload Audio File"
+                required={false}
               />
-              Make it free
-            </label>
+            )}
 
             <MyBtn name="Submit" width="w-full" />
           </MyFormWrapper>

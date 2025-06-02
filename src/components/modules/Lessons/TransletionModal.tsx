@@ -12,19 +12,30 @@ import {
 } from "@/components/ui/dialog";
 import { useUpdateTranslationMutation } from "@/redux/features/lessons/lessons.api";
 import { useState } from "react";
+import { FieldValues } from "react-hook-form";
 import { FaEdit } from "react-icons/fa";
 import { toast } from "sonner";
 
-const TransletionModal = ({ title, id }: { title: string; id: string }) => {
+const TransletionModal = ({
+  title,
+  id,
+  type,
+}: {
+  title: string;
+  id: string;
+  type: string;
+}) => {
   const [open, setOpen] = useState(false);
   const [updateTranslation] = useUpdateTranslationMutation();
 
-  const handleSubmit = async (data: string) => {
+  const handleSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Updating...");
-    console.log(data);
 
     try {
-      const res = await updateTranslation({ id, data }).unwrap();
+      const res = await updateTranslation({
+        id,
+        data: { ...data, type },
+      }).unwrap();
 
       if (res) {
         setOpen(false);

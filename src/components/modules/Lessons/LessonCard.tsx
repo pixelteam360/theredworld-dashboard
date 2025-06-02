@@ -3,22 +3,42 @@
 import Image from "next/image";
 import music from "../../../assets/images/musical-note.png";
 import { Crown } from "lucide-react";
-import { useLessonsQuery } from "@/redux/features/lessons/lessons.api";
 import Spinner from "@/components/common/Spinner";
 import Link from "next/link";
 import EditLessonModal from "./Modal/EditLessonModal";
 import DeleteModal from "@/components/common/DeleteModal";
+import { useFolderLessonsQuery } from "@/redux/features/folders/folder.api";
+import { useParams, useSearchParams } from "next/navigation";
+import AddLessonModal from "./Modal/AddLessonModal";
 
 const LessonCard = () => {
-  const { data, isFetching } = useLessonsQuery([{ name: "limit", value: 50 }]);
+  const { id } = useParams();
+  const name = useSearchParams().get("name");
+  const { data, isFetching } = useFolderLessonsQuery({
+    id,
+    data: [{ name: "limit", value: 50 }],
+  });
 
   if (isFetching) {
     return <Spinner />;
   }
-
   const item = data?.data?.data;
+
+  if (item.length < 1) {
+    return (
+      <h3 className="text-xl font-semibold text-primary text-center">
+        No data found
+      </h3>
+    );
+  }
   return (
     <div>
+      <div className="flex justify-between gap-3">
+        <h2 className="text-2xl font-medium mb-12">{name}</h2>
+        <div className="inline-block">
+          <AddLessonModal />
+        </div>
+      </div>
       {item.map((item: any) => (
         <div
           key={item.id}
@@ -40,26 +60,25 @@ const LessonCard = () => {
                   width={70}
                   className="w-6 h-6 bg-primary/10 rounded-full p-[2px]"
                 />
-                <p className="text-sm">{item.title}</p>
+                <p className="text-sm">{item.lessonNumber}. {item.title}</p>
               </div>
-              <audio controls className="h-10 w-64">
-                <source src={item.audio} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
             </div>
           </div>
 
           {item?.isLocked ? <Crown className="text-[#ffb743]" /> : <p>Free</p>}
 
-          <Link href={`lessons/${item.id}`}>
+          <Link href={`/lesson-details/${item.id}`}>
             <button className="bg-primary/70 text-white rounded-xl px-4 py-2">
-              View Translation
+              View Details
             </button>
           </Link>
           <EditLessonModal
             id={item.id}
             isLocked={item.isLocked}
+            lessonNumber={item.lessonNumber}
             title={item.title}
+            name="Edit Lesson"
+            btn="icon"
           />
         </div>
       ))}

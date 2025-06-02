@@ -12,12 +12,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useCreatelessonMutation } from "@/redux/features/lessons/lessons.api";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 const AddLessonModal = () => {
   const [open, setOpen] = useState(false);
+  const { id } = useParams();
   const [createLesson] = useCreatelessonMutation();
 
   const handleSubmit = async (data: FieldValues) => {
@@ -25,11 +27,14 @@ const AddLessonModal = () => {
 
     const formData = new FormData();
 
-    formData.append("data", JSON.stringify({ title: data.title }));
+    formData.append(
+      "data",
+      JSON.stringify({ title: data.title, folderId: id })
+    );
     if (data.image) {
       formData.append("image", data.image);
     }
-    formData.append("audio", data.audio);
+    formData.append("mainStory", data.audio);
 
     try {
       const res = await createLesson(formData).unwrap();

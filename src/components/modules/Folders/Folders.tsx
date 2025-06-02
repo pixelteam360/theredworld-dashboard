@@ -3,6 +3,7 @@
 import Spinner from "@/components/common/Spinner";
 import { useGetFoldersQuery } from "@/redux/features/folders/folder.api";
 import FolderModal from "./FolderModal";
+import Link from "next/link";
 
 const Folders = () => {
   const { data: mainCourse, isFetching } = useGetFoldersQuery([
@@ -16,7 +17,6 @@ const Folders = () => {
     return <Spinner />;
   }
 
-  console.log(mainCourse?.data);
   return (
     <div className="grid md:grid-cols-2 md:gap-12 gap-6">
       <div className="bg-white p-5 rounded-2xl">
@@ -32,12 +32,13 @@ const Folders = () => {
             <h2 className="text-primary text-center">No data found</h2>
           )}
           {mainCourse?.data?.map((item: any) => (
-            <div
+            <Link
+              href={`/folders/${item.id}?name=${item?.name}`}
               key={item.id}
               className="relative flex justify-between items-center hover:shadow-lg transition w-full bg-white rounded-2xl shadow-md p-5 "
             >
               <div className="flex items-center space-x-4 w-full">
-                <div className="bg-yellow-400 text-white rounded-full p-3">
+                <div className="bg-primary text-white rounded-full p-3">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -72,7 +73,7 @@ const Folders = () => {
                   name: item?.name,
                 }}
               />
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -91,12 +92,13 @@ const Folders = () => {
             <h2 className="text-primary text-center">No data found</h2>
           )}
           {bonusCourse?.data?.map((item: any) => (
-            <div
+            <Link
+              href={`/folders/${item.id}?name=${item?.name}`}
               key={item.id}
               className="relative flex justify-between items-center hover:shadow-lg transition w-full bg-white rounded-2xl shadow-md p-5 "
             >
               <div className="flex items-center space-x-4 w-full">
-                <div className="bg-yellow-400 text-white rounded-full p-3">
+                <div className="bg-primary text-white rounded-full p-3">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -131,7 +133,7 @@ const Folders = () => {
                   name: item?.name,
                 }}
               />
-            </div>
+            </Link>
           ))}
         </div>
       </div>
