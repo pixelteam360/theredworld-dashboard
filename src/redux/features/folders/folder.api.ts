@@ -59,13 +59,13 @@ export const FolderApi = baseApi.injectEndpoints({
       invalidatesTags: ["Folder"],
     }),
 
-    // deleteFolder: builder.mutation({
-    //   query: (id) => ({
-    //     url: `/subscription/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["Subscription"],
-    // }),
+    deleteFolder: builder.mutation({
+      query: (id) => ({
+        url: `/folder/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Folder"],
+    }),
   }),
 });
 
@@ -73,5 +73,6 @@ export const {
   useGetFoldersQuery,
   useCreateFolderMutation,
   useUpdateFolderMutation,
-  useFolderLessonsQuery
+  useFolderLessonsQuery,
+  useDeleteFolderMutation
 } = FolderApi;

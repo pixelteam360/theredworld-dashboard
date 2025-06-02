@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useDeleteFolderMutation } from "@/redux/features/folders/folder.api";
 import { useDeleteLessonMutation } from "@/redux/features/lessons/lessons.api";
 import { useDeleteSubscriptionMutation } from "@/redux/features/subscription/subscription.api";
 import { CircleHelp } from "lucide-react";
@@ -16,7 +17,7 @@ import { toast } from "sonner";
 
 interface DeleteModalProps {
   id: string;
-  type: "lesson" | "subscription";
+  type: "lesson" | "subscription" | "folder";
   btn: "icon" | "btn";
 }
 
@@ -24,6 +25,7 @@ const DeleteModal = ({ id, type, btn }: DeleteModalProps) => {
   const [open, setOpen] = useState(false);
   const [deletLesson] = useDeleteLessonMutation();
   const [deletSubscription] = useDeleteSubscriptionMutation();
+  const [deletFolder] = useDeleteFolderMutation();
 
   const handleDelete = async () => {
     const toastId = toast.loading(`Deleting...`);
@@ -33,6 +35,8 @@ const DeleteModal = ({ id, type, btn }: DeleteModalProps) => {
         res = await deletLesson(id).unwrap();
       } else if (type === "subscription") {
         res = await deletSubscription(id).unwrap();
+      } else if (type === "folder") {
+        res = await deletFolder(id).unwrap();
       }
 
       if (res.data) {
@@ -68,24 +72,24 @@ const DeleteModal = ({ id, type, btn }: DeleteModalProps) => {
             <div className="flex justify-center flex-col gap-5 items-center">
               <CircleHelp className="h-20 w-20 text-primary" />
               <div className="flex flex-col justify-center items-center gap-5 text-center">
-              <h3 className="text-xl font-medium">
-                Are you sure you want to proceed?
-              </h3>
-              <div className="flex md:gap-5 gap-3">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="bg-red-500 py-2 px-6 rounded-lg font-normal text-white"
-                >
-                  Cancle
-                </button>
-                <button
-                  onClick={handleDelete}
-                  className="bg-green-500 py-2 px-6 rounded-lg font-normal text-white"
-                >
-                  Confirm
-                </button>
+                <h3 className="text-xl font-medium">
+                  Are you sure you want to proceed?
+                </h3>
+                <div className="flex md:gap-5 gap-3">
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="bg-red-500 py-2 px-6 rounded-lg font-normal text-white"
+                  >
+                    Cancle
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className="bg-green-500 py-2 px-6 rounded-lg font-normal text-white"
+                  >
+                    Confirm
+                  </button>
+                </div>
               </div>
-            </div>
             </div>
           </DialogTitle>
         </DialogHeader>

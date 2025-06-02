@@ -24,13 +24,6 @@ const LessonCard = () => {
   }
   const item = data?.data?.data;
 
-  if (item.length < 1) {
-    return (
-      <h3 className="text-xl font-semibold text-primary text-center">
-        No data found
-      </h3>
-    );
-  }
   return (
     <div>
       <div className="flex justify-between gap-3">
@@ -39,6 +32,11 @@ const LessonCard = () => {
           <AddLessonModal />
         </div>
       </div>
+      {
+        item.length < 1   &&  <h3 className="text-xl font-semibold text-primary text-center">
+        No data found
+      </h3>
+      }
       {item.map((item: any) => (
         <div
           key={item.id}

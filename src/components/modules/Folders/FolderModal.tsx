@@ -79,8 +79,8 @@ const FolderModal = ({
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         {btn === "Icon" ? (
-          <DialogTrigger className=" text-primary ">
-            <Pencil />
+          <DialogTrigger className=" text-primary mt-1 ">
+            <Pencil  className="w-[18px] h-[18px]"/>
           </DialogTrigger>
         ) : (
           <DialogTrigger className="bg-primary rounded-lg py-2 md:px-6 px-4 text-white flex items-center gap-2">

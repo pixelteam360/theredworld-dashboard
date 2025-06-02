@@ -4,6 +4,7 @@ import Spinner from "@/components/common/Spinner";
 import { useGetFoldersQuery } from "@/redux/features/folders/folder.api";
 import FolderModal from "./FolderModal";
 import Link from "next/link";
+import DeleteModal from "@/components/common/DeleteModal";
 
 const Folders = () => {
   const { data: mainCourse, isFetching } = useGetFoldersQuery([
@@ -32,48 +33,52 @@ const Folders = () => {
             <h2 className="text-primary text-center">No data found</h2>
           )}
           {mainCourse?.data?.map((item: any) => (
-            <Link
-              href={`/folders/${item.id}?name=${item?.name}`}
-              key={item.id}
-              className="relative flex justify-between items-center hover:shadow-lg transition w-full bg-white rounded-2xl shadow-md p-5 "
-            >
-              <div className="flex items-center space-x-4 w-full">
-                <div className="bg-primary text-white rounded-full p-3">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 7h5l2 3h11v9H3V7z"
-                    />
-                  </svg>
+            <div key={item.id} className="relative">
+              <Link
+                href={`/folders/${item.id}?name=${item?.name}`}
+                className="flex justify-between items-center hover:shadow-lg transition w-full bg-white rounded-2xl shadow-md p-5 "
+              >
+                <div className="flex items-center space-x-4 w-full">
+                  <div className="bg-primary text-white rounded-full p-3">
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 7h5l2 3h11v9H3V7z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold">
+                      {item?.folderNumber}. {item?.name}
+                    </h2>
+                    <p className="text-sm text-gray-500">
+                      {item?.totalLesson} items
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-lg font-semibold">
-                    {item?.folderNumber}. {item?.name}
-                  </h2>
-                  <p className="text-sm text-gray-500">
-                    {item?.totalLesson} items
-                  </p>
-                </div>
+              </Link>
+              <div className="absolute inset-0 right-2 flex gap-5 items-center justify-end">
+                <FolderModal
+                  action="Update"
+                  name="Main"
+                  type="MAIN"
+                  btn="Icon"
+                  id={item?.id}
+                  defalultData={{
+                    folderNumber: item?.folderNumber,
+                    name: item?.name,
+                  }}
+                />
+                <DeleteModal btn="icon" id={item.id} type="folder" />
               </div>
-              <FolderModal
-                action="Update"
-                name="Main"
-                type="MAIN"
-                btn="Icon"
-                id={item?.id}
-                defalultData={{
-                  folderNumber: item?.folderNumber,
-                  name: item?.name,
-                }}
-              />
-            </Link>
+            </div>
           ))}
         </div>
       </div>
@@ -92,48 +97,53 @@ const Folders = () => {
             <h2 className="text-primary text-center">No data found</h2>
           )}
           {bonusCourse?.data?.map((item: any) => (
-            <Link
-              href={`/folders/${item.id}?name=${item?.name}`}
-              key={item.id}
-              className="relative flex justify-between items-center hover:shadow-lg transition w-full bg-white rounded-2xl shadow-md p-5 "
-            >
-              <div className="flex items-center space-x-4 w-full">
-                <div className="bg-primary text-white rounded-full p-3">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 7h5l2 3h11v9H3V7z"
-                    />
-                  </svg>
+            <div key={item.id} className="relative">
+              <Link
+                href={`/folders/${item.id}?name=${item?.name}`}
+                className="flex justify-between items-center hover:shadow-lg transition w-full bg-white rounded-2xl shadow-md p-5 "
+              >
+                <div className="flex items-center space-x-4 w-full">
+                  <div className="bg-primary text-white rounded-full p-3">
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 7h5l2 3h11v9H3V7z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold">
+                      {item?.folderNumber}. {item?.name}
+                    </h2>
+                    <p className="text-sm text-gray-500">
+                      {item?.totalLesson} items
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-lg font-semibold">
-                    {item?.folderNumber}. {item?.name}
-                  </h2>
-                  <p className="text-sm text-gray-500">
-                    {item?.totalLesson} items
-                  </p>
-                </div>
+              </Link>
+
+              <div className="absolute inset-0 right-2 flex gap-5 items-center justify-end">
+                <FolderModal
+                  action="Update"
+                  name="Main"
+                  type="MAIN"
+                  btn="Icon"
+                  id={item?.id}
+                  defalultData={{
+                    folderNumber: item?.folderNumber,
+                    name: item?.name,
+                  }}
+                />
+                <DeleteModal btn="icon" id={item.id} type="folder" />
               </div>
-              <FolderModal
-                action="Update"
-                name="Main"
-                type="MAIN"
-                btn="Icon"
-                id={item?.id}
-                defalultData={{
-                  folderNumber: item?.folderNumber,
-                  name: item?.name,
-                }}
-              />
-            </Link>
+            </div>
           ))}
         </div>
       </div>
