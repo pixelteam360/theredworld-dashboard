@@ -18,8 +18,14 @@ const CustomLineChart = () => {
     return <Spinner />;
   }
 
-  const chardData = data?.data;
-
+  const chardData = data?.data || [
+    {
+      month: "No data available",
+      price: "0",
+      count: "0",
+    },
+  ];
+  console.log(chardData);
   return (
     <div className="w-full h-full">
       <p className="font-medium my-5 text-xl">Earning</p>
