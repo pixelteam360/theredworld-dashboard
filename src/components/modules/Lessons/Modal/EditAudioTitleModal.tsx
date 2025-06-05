@@ -11,32 +11,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useCreatelessonMutation } from "@/redux/features/lessons/lessons.api";
-import { useParams } from "next/navigation";
+import { useUpdateLessonAudioMutation } from "@/redux/features/lessons/lessons.api";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-const AddLessonModal = () => {
+const EditAudioTitleModal = ({id, title}: {id: string, title: string}) => {
   const [open, setOpen] = useState(false);
-  const { id } = useParams();
-  const [createLesson] = useCreatelessonMutation();
+  const [update] = useUpdateLessonAudioMutation();
 
   const handleSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Uploading...");
-
-    const formData = new FormData();
-
-    formData.append(
-      "data",
-      JSON.stringify({ title: data.title, folderId: id })
-    );
-    if (data.image) {
-      formData.append("image", data.image);
-    }
+console.log(data);
 
     try {
-      const res = await createLesson(formData).unwrap();
+      const res = await update({...data, id}).unwrap();
 
       if (res) {
         setOpen(false);
@@ -51,27 +40,19 @@ const AddLessonModal = () => {
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger className="bg-primary rounded-2xl py-3 md:px-8 px-5 text-white">
-          Add Lesson
+        <DialogTrigger className="bg-primary rounded-xl py-1 px-4 text-white">
+          Edit Audio Name
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="text-center mb-5 text-2xl">
-              Add Lesson
+              Edit Audio Name
             </DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
 
-          <MyFormWrapper onSubmit={handleSubmit}>
-            <MyFormInput name="title" label="Audio Title" placeholder="title" />
-            <MyFormInput
-              type="file"
-              acceptType="image/*"
-              name="image"
-              label="Audio Image (potional)"
-              filePlaceholder="Upload image"
-              required={false}
-            />
+          <MyFormWrapper onSubmit={handleSubmit} defaultValues={{title}}>
+            <MyFormInput name="title" label="Audio Name" placeholder="name" />
             <MyBtn name="Submit" width="w-full" />
           </MyFormWrapper>
         </DialogContent>
@@ -80,4 +61,4 @@ const AddLessonModal = () => {
   );
 };
 
-export default AddLessonModal;
+export default EditAudioTitleModal;

@@ -10,13 +10,18 @@ const RenderBarChart = () => {
     return <Spinner />;
   }
 
-  const chardData = data?.data || [
-    {
-      month: "No data available",
-      price: "0",
-      count: "0",
-    },
-  ];
+  let chardData = data?.data;
+
+  if (chardData.length < 1) {
+    chardData = [
+      {
+        month: "No data available",
+        price: "0",
+        count: "0",
+      },
+    ];
+  }
+
   return (
     <div className="w-full h-full">
       <p className="font-medium my-5 text-xl">Subscribers</p>

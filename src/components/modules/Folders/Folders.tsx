@@ -64,7 +64,7 @@ const Folders = () => {
                   </div>
                 </div>
               </Link>
-              <div className="absolute inset-0 right-2 flex gap-5 items-center justify-end">
+              <div className="absolute right-2 top-2 flex gap-5 items-center justify-end">
                 <FolderModal
                   action="Update"
                   name="Main"
@@ -129,7 +129,7 @@ const Folders = () => {
                 </div>
               </Link>
 
-              <div className="absolute inset-0 right-2 flex gap-5 items-center justify-end">
+              <div className="absolute right-2 top-2 flex gap-5 items-center justify-end">
                 <FolderModal
                   action="Update"
                   name="Main"

@@ -63,6 +63,24 @@ export const LessonsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Lessons"],
     }),
+
+    addLessonAudio: builder.mutation({
+      query: (data) => ({
+        url: `/lesson-audio`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Lessons"],
+    }),
+
+    updateLessonAudio: builder.mutation({
+      query: (args) => ({
+        url: `/lesson-audio/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["Lessons"],
+    }),
   }),
 });
 
@@ -73,4 +91,6 @@ export const {
   useUpdateLessonMutation,
   useDeleteLessonMutation,
   useUpdateTranslationMutation,
+  useAddLessonAudioMutation,
+  useUpdateLessonAudioMutation
 } = LessonsApi;
