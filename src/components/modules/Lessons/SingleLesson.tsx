@@ -7,7 +7,7 @@ import Spinner from "@/components/common/Spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransletionModal from "./TransletionModal";
 import AddLessonAudioModal from "./Modal/AddLessonAudioModal";
-import EditAudioTitleModal from "./Modal/EditAudioTitleModal";
+// import EditAudioTitleModal from "./Modal/EditAudioTitleModal";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
