@@ -68,7 +68,7 @@ const AddLessonModal = () => {
               type="file"
               acceptType="image/*"
               name="image"
-              label="Audio Image (potional)"
+              label="Audio Image (optional)"
               filePlaceholder="Upload image"
               required={false}
             />
