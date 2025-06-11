@@ -11,7 +11,7 @@ const OverView = () => {
 
   return (
     <div className="bg-white rounded-2xl p-7 space-y-6">
-      <p className="text-xl text-center">Summery</p>
+      <p className="text-xl text-center">Summary</p>
       <div className="grid md:grid-cols-3 grid-cols-1 md:gap-7 gap-4 ">
         <div className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center gap-2 border">
           <h1 className="text-[40px] font-bold">{overView?.totalLesson}</h1>
@@ -25,7 +25,7 @@ const OverView = () => {
           <h1 className="text-[40px] font-bold">{overView?.totalStudent}</h1>
           <div className="flex gap-3 items-center">
             <PiStudentFill className="text-2xl" />
-            <p>Total Student</p>
+            <p>Total Students</p>
           </div>
         </div>
 

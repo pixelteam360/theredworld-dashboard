@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { useSingleLessonQuery } from "@/redux/features/lessons/lessons.api";
 import { useParams } from "next/navigation";
 import Spinner from "@/components/common/Spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransletionModal from "./TransletionModal";
 import AddLessonAudioModal from "./Modal/AddLessonAudioModal";
-// import EditAudioTitleModal from "./Modal/EditAudioTitleModal";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -51,7 +49,6 @@ const SingleLesson = () => {
                   <source src={audio.audio} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
-                {/* <EditAudioTitleModal id={audio.id} title={audio.title}/> */}
               </div>
 
               {audio.audioTranslations?.map((translation: any) => (
