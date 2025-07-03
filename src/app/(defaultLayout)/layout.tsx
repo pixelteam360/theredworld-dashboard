@@ -5,8 +5,8 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Insightify",
-  description: "Transform Voice, Images, and Videos into Text",
+  title: "OEL",
+  description: "Open Education Library",
 };
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {

@@ -10,8 +10,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Starter kit",
-  description: "starter kit for nextjs with redux with persist",
+  title: "OEL",
+  description: "Open Education Library",
 };
 
 export default function RootLayout({
@@ -21,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} antialiased bg-gradient-to-tr from-[#fff9f8] to-[#fad2ce]`}>
+      <body
+        className={`${roboto.className} antialiased bg-gradient-to-tr from-[#fff9f8] to-[#fad2ce]`}
+      >
         <Toaster position="bottom-right" richColors />
         <ReduxProvider>{children}</ReduxProvider>
       </body>
