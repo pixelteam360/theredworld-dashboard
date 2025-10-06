@@ -4,7 +4,7 @@ import { Crown } from "lucide-react";
 import AddSubscriptionModal from "./SubscriptiomModal/SubscriptionModal";
 import { useSubscriptionQuery } from "@/redux/features/subscription/subscription.api";
 import Spinner from "@/components/common/Spinner";
-import DeleteModal from "@/components/common/DeleteModal";
+// import DeleteModal from "@/components/common/DeleteModal";
 
 const SubscriptionsCard = () => {
   const { data, isFetching } = useSubscriptionQuery(undefined);
@@ -39,9 +39,9 @@ const SubscriptionsCard = () => {
 
           <p>Free access of all lessons</p>
 
-          <div className="absolute top-2 right-2">
+          {/* <div className="absolute top-2 right-2">
             <DeleteModal btn="icon" id={item.id} type="subscription" />
-          </div>
+          </div> */}
 
           <div className="absolute top-2 left-2 ">
             <AddSubscriptionModal
